@@ -1,6 +1,6 @@
 ## DDD 实践
 ### 领域分层图
-![img](pic/img.jpg)
+![img](pic/ddd.png)
 ### 运行项目
 - 运行`DddSampleApplication`
 ### 代码骨架
