@@ -1,0 +1,13 @@
+server:
+  port: 10086
+
+spring:
+  profiles:
+    active: dev
+  jpa:
+    open-in-view: true
+
+# 配置日志
+logging:
+  file:
+    path: logs
