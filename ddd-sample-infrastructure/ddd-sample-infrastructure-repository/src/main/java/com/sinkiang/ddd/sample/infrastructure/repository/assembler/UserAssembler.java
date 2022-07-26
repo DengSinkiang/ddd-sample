@@ -12,6 +12,10 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface UserAssembler {
-
+    /**
+     * xxx
+     * @param user
+     * @return
+     */
     UserModel toUserModel(User user);
 }
