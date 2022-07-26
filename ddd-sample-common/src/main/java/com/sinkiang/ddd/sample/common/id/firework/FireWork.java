@@ -57,10 +57,13 @@ public class FireWork {
         return fireWork;
     }
 
-    public String nextId() {
+    String nextId() {
         int sequence = this.seq.getAndAdd(1);
         String nextId = this.getGenerator().buildId(sequence);
-        this.threadLocal.remove();
+        remove();
         return nextId;
+    }
+    private void remove() {
+        threadLocal.remove();
     }
 }
