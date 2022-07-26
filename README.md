@@ -34,7 +34,7 @@ ${base}
 - domain 层的依赖尽可能少（只用一些通用工具的，如 utils、spring、lombok）
 - 凡是能够放在实体（聚合根、实体、值对象）中的业务逻辑, 不要放到 domainService 中
 - 凡是能够放在 domainService 中的业务逻辑，不要放到外层 service 中
-- 返回结果调用使用`ResultUtil.success()`或`ResultUtil.failed()`生成
+- 返回结果调用使用`ResultUtils.success()`或`ResultUtils.failed()`生成
 - adaptor 目录下的 module 间不允许相互引用
 ### ID生成器
 在`DddSampleApplication`中引入代码（默认使用雪花算法）:
