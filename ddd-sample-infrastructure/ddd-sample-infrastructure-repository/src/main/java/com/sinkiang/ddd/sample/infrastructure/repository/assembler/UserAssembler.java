@@ -1,8 +1,8 @@
 package com.sinkiang.ddd.sample.infrastructure.repository.assembler;
 
+import com.sinkiang.ddd.sample.common.util.CopierUtils;
 import com.sinkiang.ddd.sample.domain.model.User;
 import com.sinkiang.ddd.sample.infrastructure.repository.model.UserModel;
-import org.springframework.beans.BeanUtils;
 
 /**
  * @author dengxj
@@ -11,8 +11,6 @@ import org.springframework.beans.BeanUtils;
 public class UserAssembler {
 
     public static UserModel toUserModel(User user) {
-        UserModel userModel = new UserModel();
-        BeanUtils.copyProperties(user, userModel);
-        return userModel;
+        return CopierUtils.copyProperties(user, UserModel.class);
     }
 }

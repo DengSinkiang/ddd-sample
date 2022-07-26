@@ -2,8 +2,8 @@ package com.sinkiang.ddd.sample.adaptor.page.assembler;
 
 import com.sinkiang.ddd.sample.adaptor.page.dto.response.UserResDTO;
 import com.sinkiang.ddd.sample.adaptor.page.dto.request.UserReqDTO;
+import com.sinkiang.ddd.sample.common.util.CopierUtils;
 import com.sinkiang.ddd.sample.infrastructure.repository.model.UserModel;
-import org.springframework.beans.BeanUtils;
 
 /**
  * @author dengxj
@@ -12,13 +12,9 @@ import org.springframework.beans.BeanUtils;
 public class UserDTOAssembler {
 
     public static UserModel toModel(UserReqDTO userReqDTO) {
-        UserModel model = new UserModel();
-        BeanUtils.copyProperties(userReqDTO, model);
-        return model;
+        return CopierUtils.copyProperties(userReqDTO, UserModel.class);
     }
     public static UserResDTO toDTO(UserModel userModel) {
-        UserResDTO dto = new UserResDTO();
-        BeanUtils.copyProperties(userModel, dto);
-        return dto;
+        return CopierUtils.copyProperties(userModel, UserResDTO.class);
     }
 }
