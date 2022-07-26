@@ -4,6 +4,7 @@ import com.sinkiang.ddd.sample.domain.model.User;
 import com.sinkiang.ddd.sample.domain.repository.UserRepository;
 import com.sinkiang.ddd.sample.infrastructure.repository.assembler.UserAssembler;
 import com.sinkiang.ddd.sample.infrastructure.repository.service.UserService;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,6 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean createUser(User user) {
-        return userService.save(UserAssembler.toUserModel(user));
+        return userService.save(Mappers.getMapper(UserAssembler.class).toUserModel(user));
     }
 }
