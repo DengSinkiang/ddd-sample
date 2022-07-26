@@ -6,20 +6,20 @@ package com.sinkiang.ddd.sample.common.auth;
  */
 public class AuthDataInfoContext {
 
-    private static final ThreadLocal<AuthData> authDataThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<AuthData> AUTH_DATA_THREAD_LOCAL = new ThreadLocal<>();
 
     public AuthDataInfoContext() {
     }
 
     public static void saveAuthData(AuthData authData) {
-        authDataThreadLocal.set(authData);
+        AUTH_DATA_THREAD_LOCAL.set(authData);
     }
 
     public static void removeAll() {
-        authDataThreadLocal.remove();
+        AUTH_DATA_THREAD_LOCAL.remove();
     }
 
     public static AuthData getAuthData() {
-        return (AuthData)authDataThreadLocal.get();
+        return (AuthData)AUTH_DATA_THREAD_LOCAL.get();
     }
 }

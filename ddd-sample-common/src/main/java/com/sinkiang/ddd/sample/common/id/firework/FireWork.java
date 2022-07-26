@@ -59,6 +59,8 @@ public class FireWork {
 
     public String nextId() {
         int sequence = this.seq.getAndAdd(1);
-        return this.getGenerator().buildId(sequence);
+        String nextId = this.getGenerator().buildId(sequence);
+        this.threadLocal.remove();
+        return nextId;
     }
 }

@@ -7,5 +7,9 @@ import com.sinkiang.ddd.sample.domain.model.User;
  * @date 2022/7/21 15:49
  */
 public interface MessageIntegration {
+    /**
+     * xxx
+     * @param user
+     */
     void sendUserMsg(User user);
 }

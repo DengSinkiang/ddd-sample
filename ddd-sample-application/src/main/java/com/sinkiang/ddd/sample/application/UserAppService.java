@@ -7,5 +7,10 @@ import com.sinkiang.ddd.sample.domain.model.User;
  * @date 2022/7/20 10:21
  */
 public interface UserAppService {
+    /**
+     * xxx
+     * @param user
+     * @return
+     */
     boolean createUser(User user);
 }

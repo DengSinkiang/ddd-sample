@@ -21,8 +21,10 @@ class SnowflakeIdWorker {
     private long lastTimestamp = -1L;
 
     public SnowflakeIdWorker(long workerId, long datacenterId) {
-        if (workerId <= 31L && workerId >= 0L) {
-            if (datacenterId <= 31L && datacenterId >= 0L) {
+        long l1 = 0L;
+        long l2 = 31L;
+        if (workerId <= l2 && workerId >= l1) {
+            if (datacenterId <= l2 && datacenterId >= l1) {
                 this.workerId = workerId;
                 this.datacenterId = datacenterId;
             } else {

@@ -9,7 +9,7 @@ import java.util.Map;
  */
 class FireWorkSubString {
     private static String strArray = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    private static final Map<Character, Integer> characterToMap = new HashMap<>(16);
+    private static final Map<Character, Integer> CHARACTER_INTEGER_MAP = new HashMap<>(16);
     private final char[] value;
 
     public static void setStrArray(String str) {
@@ -50,7 +50,7 @@ class FireWorkSubString {
 
             for (int i = 0; i < this.value.length; ++i) {
                 int index = this.value.length - i - 1;
-                Integer integer = characterToMap.get(this.value[index]);
+                Integer integer = CHARACTER_INTEGER_MAP.get(this.value[index]);
                 sum += (long) integer;
                 int charIndex = (int) (sum % (long) strArray.length());
                 if (charIndex < 0) {
@@ -68,6 +68,7 @@ class FireWorkSubString {
         }
     }
 
+    @Override
     public String toString() {
         return new String(this.value);
     }
@@ -76,7 +77,7 @@ class FireWorkSubString {
         long ret = 0L;
 
         for (char c : this.value) {
-            Integer integer = characterToMap.get(c);
+            Integer integer = CHARACTER_INTEGER_MAP.get(c);
             ret = ret * (long) strArray.length() + (long) integer;
         }
 
@@ -85,7 +86,7 @@ class FireWorkSubString {
 
     static {
         for (int i = 0; i < strArray.length(); ++i) {
-            characterToMap.put(strArray.charAt(i), i);
+            CHARACTER_INTEGER_MAP.put(strArray.charAt(i), i);
         }
 
     }

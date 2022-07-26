@@ -7,15 +7,18 @@ import java.util.Random;
  * @date 2022/7/20 14:37
  */
 public class ClockBackMock {
-    private static final Random random = new Random();
+    private static final Random RANDOM = new Random();
     private static long offset = 0L;
 
     public ClockBackMock() {
     }
 
     public static long getCurrentTimeMillis() {
-        if (random.nextInt(1000) < 100) {
-            offset += (long) random.nextInt(10000);
+        int bound = 1000;
+        int bound2 = 10000;
+        int random = 100;
+        if (RANDOM.nextInt(bound) < random) {
+            offset += (long) RANDOM.nextInt(bound2);
         }
 
         return System.currentTimeMillis() - offset;

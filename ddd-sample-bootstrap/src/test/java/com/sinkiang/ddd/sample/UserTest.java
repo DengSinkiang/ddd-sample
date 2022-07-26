@@ -23,7 +23,7 @@ public class UserTest {
     private UserRepository userRepository;
 
     @Test
-    public void testSaveUser() {
+    void testSaveUser() {
         User user = new User();
         user.setUsername("dengxinjiang");
         user.setAge(27);
@@ -33,7 +33,7 @@ public class UserTest {
     }
 
     @Test
-    public void testUser() {
+    void testUser() {
         PageRequest<UserReqDTO> pageRequest = new PageRequest<>();
         pageRequest.setCurrent(1L);
         pageRequest.setPageSize(10L);
@@ -47,7 +47,7 @@ public class UserTest {
      * [11,5,6,7,10,13,20] 二分查找，找到 6
      */
     @Test
-    public void testRecursionBinarySearch() {
+    void testRecursionBinarySearch() {
         int[] a = new int[]{11, 5, 6, 7, 10, 13, 20};
         int[] ints = quickSort(a);
         int i = recursionBinarySearch(ints, 6, 0, a.length - 1);

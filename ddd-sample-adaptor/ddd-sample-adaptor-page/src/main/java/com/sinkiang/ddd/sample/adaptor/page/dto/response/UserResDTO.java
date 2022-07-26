@@ -42,4 +42,14 @@ public class UserResDTO {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return "UserResDTO{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }

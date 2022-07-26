@@ -1,5 +1,9 @@
 package com.sinkiang.ddd.sample.adaptor.facade.dto;
 
+/**
+ * @author dengxj
+ * @date 2022/7/20 14:57
+ */
 public class UserDTO {
 
     private String username;
@@ -37,5 +41,15 @@ public class UserDTO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "username='" + username + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }
