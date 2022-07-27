@@ -1,5 +1,6 @@
 package com.sinkiang.ddd.sample.common.util;
 
+import org.apache.commons.lang3.StringUtils;
 import java.lang.reflect.Field;
 import java.time.Duration;
 import java.time.Instant;
@@ -20,7 +21,6 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
-import org.springframework.util.StringUtils;
 
 /**
  * @author dengxj
