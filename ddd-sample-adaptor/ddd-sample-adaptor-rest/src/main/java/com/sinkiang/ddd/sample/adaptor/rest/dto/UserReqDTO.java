@@ -1,11 +1,14 @@
 package com.sinkiang.ddd.sample.adaptor.rest.dto;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @author dengxj
  * @date 2022/7/21 14:51
  */
 public class UserReqDTO {
 
+    @NotBlank(message = "用户名不能为空")
     private String username;
     private String email;
     private Integer age;
