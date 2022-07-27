@@ -20,6 +20,6 @@ public class AuthDataInfoContext {
     }
 
     public static AuthData getAuthData() {
-        return (AuthData)AUTH_DATA_THREAD_LOCAL.get();
+        return AUTH_DATA_THREAD_LOCAL.get();
     }
 }
