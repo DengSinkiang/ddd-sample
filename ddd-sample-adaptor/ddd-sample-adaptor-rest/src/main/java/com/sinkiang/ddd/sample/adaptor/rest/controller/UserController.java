@@ -4,7 +4,6 @@ import com.sinkiang.ddd.sample.adaptor.rest.assembler.UserDTOAssembler;
 import com.sinkiang.ddd.sample.adaptor.rest.dto.UserReqDTO;
 import com.sinkiang.ddd.sample.application.UserAppService;
 import com.sinkiang.ddd.sample.common.util.ResultUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,8 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/rest/user/v1")
 public class UserController {
 
-    @Autowired
-    private UserAppService userAppService;
+    private final UserAppService userAppService;
+
+    public UserController(UserAppService userAppService) {
+        this.userAppService = userAppService;
+    }
 
     @PostMapping(value = "/createUser")
     public ResultUtils<Boolean> createUser(@RequestBody @Validated UserReqDTO userReqDTO) {

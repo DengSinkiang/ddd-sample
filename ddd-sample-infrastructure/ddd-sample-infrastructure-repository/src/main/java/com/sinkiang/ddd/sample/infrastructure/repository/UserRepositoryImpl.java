@@ -5,7 +5,6 @@ import com.sinkiang.ddd.sample.domain.repository.UserRepository;
 import com.sinkiang.ddd.sample.infrastructure.repository.assembler.UserAssembler;
 import com.sinkiang.ddd.sample.infrastructure.repository.service.UserService;
 import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,8 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserRepositoryImpl implements UserRepository {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserRepositoryImpl(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)

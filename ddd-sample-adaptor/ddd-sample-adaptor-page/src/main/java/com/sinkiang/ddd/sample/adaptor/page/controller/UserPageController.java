@@ -10,7 +10,6 @@ import com.sinkiang.ddd.sample.infrastructure.repository.model.UserModel;
 import com.sinkiang.ddd.sample.infrastructure.repository.service.UserService;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,21 +27,26 @@ import java.util.List;
 @RequestMapping(value = "/rest/user/page/v1")
 public class UserPageController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserPageController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping(value = "/listUserByPage")
     public ResultUtils<PageResult<UserResDTO>> listUserByPage(@RequestBody PageRequest<UserReqDTO> pageRequest) {
         PageRequest<UserModel> model = new PageRequest<>();
-        BeanUtils.copyProperties(pageRequest, model);
-        UserModel userModel = new UserModel();
+        model.setCurrent(pageRequest.getCurrent());
+        model.setPageSize(pageRequest.getPageSize());
         if (pageRequest.getData() != null) {
             model.setData(UserDTOAssembler.toModel(pageRequest.getData()));
         }
         PageResult<UserModel> userModelPageResult = userService.listUserByPage(model);
         PageResult<UserResDTO> result = new PageResult<>();
         List<UserResDTO> list = new ArrayList<>(10);
-        BeanUtils.copyProperties(userModelPageResult, result);
+        result.setCurrent(userModelPageResult.getCurrent());
+        result.setPageSize(userModelPageResult.getPageSize());
+        result.setTotal(userModelPageResult.getTotal());
         if (CollectionUtils.isNotEmpty(userModelPageResult.getList())) {
             userModelPageResult.getList().forEach(a -> {
                 list.add(UserDTOAssembler.toDTO(a));

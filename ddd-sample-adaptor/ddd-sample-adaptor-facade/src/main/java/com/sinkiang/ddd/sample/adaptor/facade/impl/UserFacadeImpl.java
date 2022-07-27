@@ -4,7 +4,6 @@ import com.sinkiang.ddd.sample.adaptor.facade.UserFacade;
 import com.sinkiang.ddd.sample.adaptor.facade.assembler.UserDTOAssembler;
 import com.sinkiang.ddd.sample.adaptor.facade.dto.UserDTO;
 import com.sinkiang.ddd.sample.application.UserAppService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,8 +13,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserFacadeImpl implements UserFacade {
 
-    @Autowired
-    private UserAppService userAppService;
+    private final UserAppService userAppService;
+
+    public UserFacadeImpl(UserAppService userAppService) {
+        this.userAppService = userAppService;
+    }
 
     @Override
     public void createUser(UserDTO userDTO) {
