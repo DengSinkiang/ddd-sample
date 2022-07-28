@@ -471,46 +471,26 @@ public class DateUtils {
 
     public static Date plus(Date source, long amount, TimeUnit timeUnit) {
         Optional.ofNullable(source).orElseThrow(() -> new RuntimeException("source can not be null"));
-        Optional.ofNullable(amount).orElseThrow(() -> new RuntimeException("amount can not be null"));
-        Optional.ofNullable(timeUnit).orElseThrow(() -> {
-            return new RuntimeException("timeUnit can not be null");
-        });
+        Optional.ofNullable(timeUnit).orElseThrow(() -> new RuntimeException("timeUnit can not be null"));
         LocalDateTime localDateTime = plus(dateToLocalDateTimeConverter(source), amount, timeUnit);
         return localDateTimeToDateConverter(localDateTime);
     }
 
     public static Instant plus(Instant source, long amount, TimeUnit timeUnit) {
         Optional.ofNullable(source).orElseThrow(() -> new RuntimeException("source can not be null"));
-        Optional.ofNullable(amount).orElseThrow(() -> new RuntimeException("amount can not be null"));
-        Optional.ofNullable(timeUnit).orElseThrow(() -> {
-            return new RuntimeException("timeUnit can not be null");
-        });
-        return (Instant) doPlus(source, amount, timeUnit);
+        Optional.ofNullable(timeUnit).orElseThrow(() -> new RuntimeException("timeUnit can not be null"));
+        return (Instant) doPlus(source.plusMillis(TimeUnit.HOURS.toMillis(8)), amount, timeUnit);
     }
 
     public static LocalDateTime plus(LocalDateTime source, long amount, TimeUnit timeUnit) {
-        Optional.ofNullable(source).orElseThrow(() -> {
-            return new RuntimeException("source can not be null");
-        });
-        Optional.ofNullable(amount).orElseThrow(() -> {
-            return new RuntimeException("amount can not be null");
-        });
-        Optional.ofNullable(timeUnit).orElseThrow(() -> {
-            return new RuntimeException("timeUnit can not be null");
-        });
+        Optional.ofNullable(source).orElseThrow(() -> new RuntimeException("source can not be null"));
+        Optional.ofNullable(timeUnit).orElseThrow(() -> new RuntimeException("timeUnit can not be null"));
         return (LocalDateTime) doPlus(source, amount, timeUnit);
     }
 
     public static LocalDate plus(LocalDate source, long amount, TimeUnit timeUnit) {
-        Optional.ofNullable(source).orElseThrow(() -> {
-            return new RuntimeException("source can not be null");
-        });
-        Optional.ofNullable(amount).orElseThrow(() -> {
-            return new RuntimeException("amount can not be null");
-        });
-        Optional.ofNullable(timeUnit).orElseThrow(() -> {
-            return new RuntimeException("timeUnit can not be null");
-        });
+        Optional.ofNullable(source).orElseThrow(() -> new RuntimeException("source can not be null"));
+        Optional.ofNullable(timeUnit).orElseThrow(() -> new RuntimeException("timeUnit can not be null"));
         if (TimeUnit.DAYS != timeUnit) {
             throw new RuntimeException("LocalDate can not plus with :" + timeUnit.name());
         } else {
@@ -519,15 +499,8 @@ public class DateUtils {
     }
 
     public static LocalTime plus(LocalTime source, long amount, TimeUnit timeUnit) {
-        Optional.ofNullable(source).orElseThrow(() -> {
-            return new RuntimeException("source can not be null");
-        });
-        Optional.ofNullable(amount).orElseThrow(() -> {
-            return new RuntimeException("amount can not be null");
-        });
-        Optional.ofNullable(timeUnit).orElseThrow(() -> {
-            return new RuntimeException("timeUnit can not be null");
-        });
+        Optional.ofNullable(source).orElseThrow(() -> new RuntimeException("source can not be null"));
+        Optional.ofNullable(timeUnit).orElseThrow(() -> new RuntimeException("timeUnit can not be null"));
         if (TimeUnit.DAYS == timeUnit) {
             throw new RuntimeException("LocalDate can not plus with :" + timeUnit.name());
         } else {
@@ -539,15 +512,15 @@ public class DateUtils {
         Optional.ofNullable(timeUnit).orElseThrow(() -> new RuntimeException("timeUnit can not be null"));
         Optional.ofNullable(tClass).orElseThrow(() -> new RuntimeException("tClass can not be null"));
         if (tClass.getName().equals(Date.class.getName())) {
-            return (T) plus(new Date(), amount, timeUnit);
+            return tClass.cast(plus(new Date(), amount, timeUnit));
         } else if (tClass.getName().equals(Instant.class.getName())) {
-            return (T) plus(Instant.now(), amount, timeUnit);
+            return tClass.cast(plus(Instant.now(), amount, timeUnit));
         } else if (tClass.getName().equals(LocalDateTime.class.getName())) {
-            return (T) plus(Instant.now(), amount, timeUnit);
+            return tClass.cast(plus(LocalDateTime.now(), amount, timeUnit));
         } else if (tClass.getName().equals(LocalDate.class.getName())) {
-            return (T) plus(Instant.now(), amount, timeUnit);
+            return tClass.cast(plus(LocalDate.now(), amount, timeUnit));
         } else if (tClass.getName().equals(LocalTime.class.getName())) {
-            return (T) plus(Instant.now(), amount, timeUnit);
+            return tClass.cast(plus(LocalTime.now(), amount, timeUnit));
         } else {
             throw new RuntimeException("can not plus now with class:" + tClass.getName());
         }
@@ -584,7 +557,7 @@ public class DateUtils {
     public static Instant minus(Instant source, long amount, TimeUnit timeUnit) {
         Optional.ofNullable(source).orElseThrow(() -> new RuntimeException("source can not be null"));
         Optional.ofNullable(timeUnit).orElseThrow(() -> new RuntimeException("timeUnit can not be null"));
-        return (Instant) doMinus(source, amount, timeUnit);
+        return (Instant) doMinus(source.plusMillis(TimeUnit.HOURS.toMillis(8)), amount, timeUnit);
     }
 
     public static LocalDateTime minus(LocalDateTime source, long amount, TimeUnit timeUnit) {
@@ -617,15 +590,15 @@ public class DateUtils {
         Optional.ofNullable(timeUnit).orElseThrow(() -> new RuntimeException("timeUnit can not be null"));
         Optional.ofNullable(tClass).orElseThrow(() -> new RuntimeException("tClass can not be null"));
         if (tClass.getName().equals(Date.class.getName())) {
-            return (T) minus(new Date(), amount, timeUnit);
+            return tClass.cast(minus(new Date(), amount, timeUnit));
         } else if (tClass.getName().equals(Instant.class.getName())) {
-            return (T) minus(Instant.now(), amount, timeUnit);
+            return tClass.cast(minus(Instant.now(), amount, timeUnit));
         } else if (tClass.getName().equals(LocalDateTime.class.getName())) {
-            return (T) minus(Instant.now(), amount, timeUnit);
+            return tClass.cast(minus(LocalDateTime.now(), amount, timeUnit));
         } else if (tClass.getName().equals(LocalDate.class.getName())) {
-            return (T) minus(Instant.now(), amount, timeUnit);
+            return tClass.cast(minus(LocalDate.now(), amount, timeUnit));
         } else if (tClass.getName().equals(LocalTime.class.getName())) {
-            return (T) minus(Instant.now(), amount, timeUnit);
+            return tClass.cast(minus(LocalTime.now(), amount, timeUnit));
         } else {
             throw new RuntimeException("can not minus now with class:" + tClass.getName());
         }
