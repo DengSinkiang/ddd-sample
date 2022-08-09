@@ -8,9 +8,12 @@ import com.sinkiang.ddd.sample.domain.model.User;
 import com.sinkiang.ddd.sample.domain.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import javax.annotation.Resource;
-import java.util.concurrent.locks.LockSupport;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author dengxj
@@ -21,6 +24,9 @@ public class UserTest {
 
     @Resource
     private UserRepository userRepository;
+
+    @Resource
+    private ThreadPoolTaskExecutor asyncTaskExecutor;
 
     @Test
     void testSaveUser() {
@@ -120,6 +126,55 @@ public class UserTest {
         }
         n[start] = tmp;
         return start;
+    }
+
+    @Test
+    public void test22222() {
+
+        CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
+            int result = 100;
+            System.out.println("第一次运算：" + result);
+            return result;
+        }, asyncTaskExecutor).thenApply(number -> {
+            int result = number * 3;
+            System.out.println("第二次运算：" + result);
+            return result;
+        });
+
+        CompletableFuture<Integer> future1 = CompletableFuture
+                .supplyAsync(() -> {
+                    int number = new Random().nextInt(10);
+                    System.out.println("任务1结果：" + number);
+                    return number;
+                });
+        CompletableFuture<Integer> future2 = CompletableFuture
+                .supplyAsync(() -> {
+                    int number = new Random().nextInt(10);
+                    System.out.println("任务2结果：" + number);
+                    return number;
+                });
+        CompletableFuture<Integer> result = future1
+                .thenCombine(future2, Integer::sum);
+        System.out.println("组合后结果：" + result.join());
+
+        CompletableFuture<String> future11 = CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("future11完成");
+            return "future11完成";
+        });
+
+        CompletableFuture<String> future22 = CompletableFuture.supplyAsync(() -> {
+            System.out.println("future22完成");
+            return "future22完成";
+        });
+
+        CompletableFuture<Void> combindFuture = CompletableFuture.allOf(future11, future22);
+        combindFuture.join();
+
     }
 
 
