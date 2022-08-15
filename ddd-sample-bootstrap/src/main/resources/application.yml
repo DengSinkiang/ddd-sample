@@ -1,7 +1,13 @@
+# 配置项目信息
+application:
+  version: 2.0.0
+
 server:
   port: 10086
 
 spring:
+  application:
+    name: ddd-sample
   profiles:
     active: dev
   jpa:
