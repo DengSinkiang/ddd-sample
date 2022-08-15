@@ -3,7 +3,7 @@ package com.sinkiang.ddd.sample.common.exception;
 import org.springframework.util.StringUtils;
 
 /**
- * @author sinkiang
+ * @author dengxj
  * @date 2022/4/7 10:32
  */
 public class EntityExistException extends RuntimeException {
