@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 /**
  * @description: API 返回结果封装工具类
- * @author: sinkiang
+ * @author: dengxj
  * @date: 2020/4/13 9:45
  */
 @Data
